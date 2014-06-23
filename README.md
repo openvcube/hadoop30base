@@ -1,4 +1,4 @@
-hadoop24
+Hadoop 2.4基础内部资料
 ========
 
-Hadoop 2.4系列作品
+Hadoop 2.4基础内部资料
