@@ -20,15 +20,9 @@ import org.apache.hadoop.io.IOUtils;
 
 
 /**
- * <pre>
- * Hadoop HDFS操作例子。
- * </pre>
- * @author http://www.open-v.com
- * @version 1.00.00
- * <pre>
- * 修改记录
- *    修改后版本:     修改人：  修改日期:     修改内容: 
- * </pre>
+ * HDFS文件操作例子
+ * @author http://www.openv.org  
+ *
  */
 public class HDFSOperateDemo {
 	
@@ -141,8 +135,7 @@ public class HDFSOperateDemo {
 		}
 	}
    
-   /**
-    * 查看文件状态
+   /*查看文件状态
     * @param hdfs FileSystem实例
     * 
     */	
@@ -167,8 +160,7 @@ public static void listStatus(FileSystem hdfs)throws IOException{
 	
 }
 
-/**
- * 文件删除 
+/*文件删除 
  * @param hdfs FileSystem实例
  *
  */
@@ -180,8 +172,7 @@ public static void removeFile(FileSystem hdfs)throws IOException{
 	
 }
 
-/**
- * 查询集群中所有DataNode 
+/*查询集群中所有DataNode 
  * @param hdfs FileSystem实例
  *
  */
