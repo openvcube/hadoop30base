@@ -18,174 +18,185 @@ import org.apache.hadoop.hdfs.HdfsConfiguration;
 import org.apache.hadoop.hdfs.protocol.DatanodeInfo;
 import org.apache.hadoop.io.IOUtils;
 
-
 /**
- * HDFSÎÄ¼ş²Ù×÷Àı×Ó
- * @author http://www.openv.org  
- *
+ * 
+ * <pre>
+ * HDFSæ–‡ä»¶æ“ä½œä¾‹å­ã€‚
+ * </pre>
+ * 
+ * @author http://www.open-v.com
+ * @version 1.00.00
+ * 
+ *          <pre>
+ * ä¿®æ”¹è®°å½•
+ *    ä¿®æ”¹åç‰ˆæœ¬:     ä¿®æ”¹äººï¼š  ä¿®æ”¹æ—¥æœŸ:     ä¿®æ”¹å†…å®¹:
+ * </pre>
  */
 public class HDFSOperateDemo {
-	
+
 	/**
-	 * main ·½·¨
+	 * main æ–¹æ³•
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Configuration conf =new HdfsConfiguration();
+		Configuration conf = new HdfsConfiguration();
 		try {
 			conf.addResource("/home/hadoop/hadoop-2.4.1/etc/hadoop/core-site.xml");
 			conf.addResource("/home/hadoop/hadoop-2.4.1/etc/hadoop/hdfs-site.xml");
 			conf.get("fs.defaultFS");
 			conf.getPropertySources("fs.defaultFS");
 			conf.set("fs.defaultFS", "hdfs://name1:9000");
-			FileSystem hdfs=FileSystem.get(conf);
-			if("create".equals(args[0])){
+			FileSystem hdfs = FileSystem.get(conf);
+			if ("create".equals(args[0])) {
 				createDir(hdfs);
-			}else if("upload".equals(args[0])){
+			} else if ("upload".equals(args[0])) {
 				uploadFile(hdfs);
-			}else if("append".equals(args[0])){
+			} else if ("append".equals(args[0])) {
 				appendFile(hdfs);
-			}else if("read".equals(args[0])){
+			} else if ("read".equals(args[0])) {
 				readFile(hdfs);
-			}else if("list".equals(args[0])){
+			} else if ("list".equals(args[0])) {
 				listStatus(hdfs);
-			}else if("remove".equals(args[0])){
+			} else if ("remove".equals(args[0])) {
 				removeFile(hdfs);
-			}else if("dataNode".equals(args[0])){
+			} else if ("dataNode".equals(args[0])) {
 				getAllDataNode(hdfs);
 			}
-			
- 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
-	
-	
-	
-      /**
-       * Ä¿Â¼´´½¨
-       * @param hdfs  FileSystemÊµÀı
-       */
-	public static void createDir(FileSystem hdfs) throws IOException{
-		
-		Path path=new Path("/user/baidu");
-		 boolean flag=hdfs.mkdirs(path);
-		 System.out.println("make dirs  /user/baidu reslut is  " +flag);
-	}
-	
+
 	/**
-	 * ÎÄ¼şÉÏ´«
-	 * @param hdfs FileSystemÊµÀı
+	 * ç›®å½•åˆ›å»º
+	 * 
+	 * @param hdfs
+	 *            FileSystemå®ä¾‹
 	 */
-   public static void uploadFile(FileSystem hdfs) throws IOException{
-		Path source=new Path("/home/hadoop/localFile/helloWord.txt");
-		Path source2=new Path("/home/hadoop/localFile/helloChina.txt");
- 		Path target=new Path("/user/baidu");
- 		hdfs.setWorkingDirectory(target);
+	public static void createDir(FileSystem hdfs) throws IOException {
+		Path path = new Path("/user/baidu");
+		boolean flag = hdfs.mkdirs(path);
+		System.out.println("make dirs  /user/baidu reslut is  " + flag);
+	}
+
+	/**
+	 * æ–‡ä»¶ä¸Šä¼ 
+	 * 
+	 * @param hdfs
+	 *            FileSystemå®ä¾‹
+	 */
+	public static void uploadFile(FileSystem hdfs) throws IOException {
+		Path source = new Path("/home/hadoop/localFile/helloWord.txt");
+		Path source2 = new Path("/home/hadoop/localFile/helloChina.txt");
+		Path target = new Path("/user/baidu");
+		hdfs.setWorkingDirectory(target);
 		hdfs.copyFromLocalFile(source, target);
 		hdfs.copyFromLocalFile(source2, target);
-
 	}
-	
-    /**
-     * ÎÄ¼ş×·¼Ó
-     * @param hdfs FileSystemÊµÀı
-     */
-   public static void appendFile(FileSystem hdfs) {
-	   String dst="/user/baidu/helloWord.txt";
-		 FileSystem.setDefaultUri(hdfs.getConf(), URI.create(dst));
-		 FSDataOutputStream fos =null;
-		 InputStream in=  null;
-		 try {
-			fos=hdfs.append(new Path(dst));
-			 in=new ByteArrayInputStream("welcome to www.openv.org".getBytes()); 
-			 IOUtils.copyBytes(in, fos, 1024);
+
+	/**
+	 * æ–‡ä»¶è¿½åŠ 
+	 * 
+	 * @param hdfs
+	 *            FileSystemå®ä¾‹
+	 */
+	public static void appendFile(FileSystem hdfs) {
+		String dst = "/user/baidu/helloWord.txt";
+		FileSystem.setDefaultUri(hdfs.getConf(), URI.create(dst));
+		FSDataOutputStream fos = null;
+		InputStream in = null;
+		try {
+			fos = hdfs.append(new Path(dst));
+			in = new ByteArrayInputStream("welcome to www.openv.org".getBytes());
+			IOUtils.copyBytes(in, fos, 1024);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			IOUtils.closeStream(in);
 			IOUtils.closeStream(fos);
 		}
 	}
-   
-   /**
-    * ¶ÁÈ¡ÎÄ¼ş
-    * @param hdfs FileSystemÊµÀı
-    */
-   public static void readFile(FileSystem hdfs) {
-	   String src="/user/baidu/helloWord.txt";
-		 FileSystem.setDefaultUri(hdfs.getConf(), URI.create(src));
-		 OutputStream out =System.out;
-		 FSDataInputStream fis=  null;
-		 try {
-			 fis=hdfs.open(new Path(src));
-			 
+
+	/**
+	 * è¯»å–æ–‡ä»¶
+	 * 
+	 * @param hdfs
+	 *            FileSystemå®ä¾‹
+	 */
+	public static void readFile(FileSystem hdfs) {
+		String src = "/user/baidu/helloWord.txt";
+		FileSystem.setDefaultUri(hdfs.getConf(), URI.create(src));
+		OutputStream out = System.out;
+		FSDataInputStream fis = null;
+		try {
+			fis = hdfs.open(new Path(src));
+
 			IOUtils.copyBytes(fis, out, 1024);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			IOUtils.closeStream(fis);
 			IOUtils.closeStream(out);
 		}
 	}
-   
-   /*²é¿´ÎÄ¼ş×´Ì¬
-    * @param hdfs FileSystemÊµÀı
-    * 
-    */	
-public static void listStatus(FileSystem hdfs)throws IOException{
-	Path path=new Path("/user/baidu/");
-    FileStatus[] fst=	hdfs.listStatus(path, new PathFilter() {
-		
-		@Override
-		public boolean accept(Path path) {
-			System.out.println("...before filter..."+ path.getName());
-			 if(path.getName().endsWith("helloChina.txt"))
-				 return false;
-			return true;
-		}
-	});
-    
-    Path fspath[]=FileUtil.stat2Paths(fst);
-    for (Path path2 : fspath) {
-		System.out.println("...after fiter..." + path2);
-	}
-    		
-	
-}
 
-/*ÎÄ¼şÉ¾³ı 
- * @param hdfs FileSystemÊµÀı
- *
- */
-public static void removeFile(FileSystem hdfs)throws IOException{
-	 Path path=new Path("/user/baidu/helloChina.txt");
-	 Path path2=new Path("/user/baidu/helloWord.txt");
- 	hdfs.deleteOnExit(path);
- 	hdfs.deleteOnExit(path2);
-	
-}
+	/*
+	 * æŸ¥çœ‹æ–‡ä»¶çŠ¶æ€
+	 * 
+	 * @param hdfs FileSystemå®ä¾‹
+	 */
+	public static void listStatus(FileSystem hdfs) throws IOException {
+		Path path = new Path("/user/baidu/");
+		FileStatus[] fst = hdfs.listStatus(path, new PathFilter() {
 
-/*²éÑ¯¼¯ÈºÖĞËùÓĞDataNode 
- * @param hdfs FileSystemÊµÀı
- *
- */
-public static void getAllDataNode(FileSystem hdfs)throws IOException{
-	DistributedFileSystem dfs=(DistributedFileSystem) hdfs;
-	DatanodeInfo[] nodeArr=dfs.getDataNodeStats();
-	if(nodeArr!=null && nodeArr.length>0){
-		 for (DatanodeInfo dataNode : nodeArr) {
-			System.out.println(dataNode.getHostName() + ":" + dataNode.getIpAddr());
+			@Override
+			public boolean accept(Path path) {
+				System.out.println("...before filter..." + path.getName());
+				if (path.getName().endsWith("helloChina.txt"))
+					return false;
+				return true;
+			}
+		});
+
+		Path fspath[] = FileUtil.stat2Paths(fst);
+		for (Path path2 : fspath) {
+			System.out.println("...after fiter..." + path2);
 		}
 	}
-	
-}
 
+	/*
+	 * æ–‡ä»¶åˆ é™¤
+	 * 
+	 * @param hdfs FileSystemå®ä¾‹
+	 */
+	public static void removeFile(FileSystem hdfs) throws IOException {
+		Path path = new Path("/user/baidu/helloChina.txt");
+		Path path2 = new Path("/user/baidu/helloWord.txt");
+		hdfs.deleteOnExit(path);
+		hdfs.deleteOnExit(path2);
+	}
+
+	/*
+	 * æŸ¥è¯¢é›†ç¾¤ä¸­æ‰€æœ‰DataNode
+	 * 
+	 * @param hdfs FileSystemå®ä¾‹
+	 */
+	public static void getAllDataNode(FileSystem hdfs) throws IOException {
+		DistributedFileSystem dfs = (DistributedFileSystem) hdfs;
+		DatanodeInfo[] nodeArr = dfs.getDataNodeStats();
+		if (nodeArr != null && nodeArr.length > 0) {
+			for (DatanodeInfo dataNode : nodeArr) {
+				System.out.println(dataNode.getHostName() + ":"
+						+ dataNode.getIpAddr());
+			}
+		}
+
+	}
 
 }
