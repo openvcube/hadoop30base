@@ -32,7 +32,7 @@ public class HadoopURLReadData {
 		InputStream in = null;
 		try {
 		    //打开数据流
-			in = new URL("hdfs://192.168.0.130:9000/user/openv/at.txt")
+			in = new URL("hdfs://192.168.1.130:9000/user/openv/b.txt")
 					.openStream();
 			//将数据输出到控制台
 			IOUtils.copy(in, System.out);

@@ -29,8 +29,8 @@ public class HDFSGetDataNodesDemo {
 	public static void main(String[] args) {
 		Configuration conf = new HdfsConfiguration();
 		try {
-			conf.addResource("/home/hadoop/hadoop-2.4.1/etc/hadoop/core-site.xml");
-			conf.addResource("/home/hadoop/hadoop-2.4.1/etc/hadoop/hdfs-site.xml");
+			conf.addResource("/home/hadoop/hadoop-2.5.1/etc/hadoop/core-site.xml");
+			conf.addResource("/home/hadoop/hadoop-2.5.1/etc/hadoop/hdfs-site.xml");
 			conf.set("fs.defaultFS", "hdfs://name1:9000");
 			FileSystem hdfs = FileSystem.get(conf);
 			getAllDataNode(hdfs);
@@ -40,7 +40,7 @@ public class HDFSGetDataNodesDemo {
 	}
 
 	/**
-	 * 查询集群中所有DataNode
+	 * 查询集群中所有DataNode。
 	 * 
 	 * @param hdfs
 	 *            FileSystem实例
@@ -56,4 +56,5 @@ public class HDFSGetDataNodesDemo {
 			}
 		}
 	}
+
 }

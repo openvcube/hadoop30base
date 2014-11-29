@@ -30,16 +30,11 @@ import org.apache.hadoop.io.IOUtils;
  */
 public class HDFSAppendDemo {
 
-	/**
-	 * * main 方法
-	 * 
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		Configuration conf = new HdfsConfiguration();
 		try {
-			conf.addResource("/home/hadoop/hadoop-2.4.1/etc/hadoop/core-site.xml");
-			conf.addResource("/home/hadoop/hadoop-2.4.1/etc/hadoop/hdfs-site.xml");
+			conf.addResource("/home/hadoop/hadoop-2.5.1/etc/hadoop/core-site.xml");
+			conf.addResource("/home/hadoop/hadoop-2.5.1/etc/hadoop/hdfs-site.xml");
 			conf.set("fs.defaultFS", "hdfs://name1:9000");
 			FileSystem hdfs = FileSystem.get(conf);
 			appendFile(hdfs);
@@ -49,7 +44,7 @@ public class HDFSAppendDemo {
 	}
 
 	/**
-	 * 文件追加
+	 * 文件追加。
 	 * 
 	 * @param hdfs
 	 *            FileSystem实例
@@ -61,7 +56,7 @@ public class HDFSAppendDemo {
 		InputStream in = null;
 		try {
 			fos = hdfs.append(new Path(dst));
-			in = new ByteArrayInputStream("welcome to www.openv.org".getBytes());
+			in = new ByteArrayInputStream("welcome to www.open-v.com".getBytes());
 			IOUtils.copyBytes(in, fos, 1024);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -71,4 +66,5 @@ public class HDFSAppendDemo {
 			IOUtils.closeStream(fos);
 		}
 	}
+
 }

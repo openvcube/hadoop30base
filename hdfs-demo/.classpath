@@ -13,17 +13,17 @@
 	<classpathentry kind="lib" path="/hadoop2xbase-libs/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="/hadoop2xbase-libs/commons-logging-1.1.3.jar"/>
 	<classpathentry kind="lib" path="/hadoop2xbase-libs/guava-11.0.2.jar"/>
-	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-auth-2.4.1.jar"/>
-	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-common-2.4.1.jar"/>
-	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-hdfs-2.4.1.jar"/>
-	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-hdfs-nfs-2.4.1.jar"/>
-	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-nfs-2.4.1.jar"/>
-	<classpathentry kind="lib" path="/hadoop2xbase-libs/jackson-core-asl-1.8.8.jar"/>
-	<classpathentry kind="lib" path="/hadoop2xbase-libs/jackson-mapper-asl-1.8.8.jar"/>
 	<classpathentry kind="lib" path="/hadoop2xbase-libs/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="/hadoop2xbase-libs/protobuf-java-2.5.0.jar"/>
 	<classpathentry kind="lib" path="/hadoop2xbase-libs/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="/hadoop2xbase-libs/slf4j-log4j12-1.7.5.jar"/>
 	<classpathentry kind="lib" path="/hadoop2xbase-libs/xmlenc-0.52.jar"/>
+	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-auth-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-common-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-hdfs-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-hdfs-nfs-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/hadoop2xbase-libs/hadoop-nfs-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/hadoop2xbase-libs/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="/hadoop2xbase-libs/jackson-mapper-asl-1.9.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
